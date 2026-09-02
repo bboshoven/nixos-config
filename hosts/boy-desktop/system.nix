@@ -15,5 +15,8 @@
     ../../modules/system/openssh.nix
     ../../modules/system/resilio.nix
     ../../modules/system/steam.nix
+    ../../modules/system/zen.nix
+    ../../modules/system/libreoffice.nix
+    ../../modules/system/kitty.nix
   ];
 }

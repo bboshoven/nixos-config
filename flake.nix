@@ -39,7 +39,7 @@
           ./hosts/boy-desktop/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            programs.nix-ld.dev.enable = true;
+            programs.nix-ld.enable = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.boy = import ./modules/home/workstation/default.nix;
