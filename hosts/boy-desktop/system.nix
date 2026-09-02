@@ -3,6 +3,7 @@
     ./modules/nvidia.nix
     ./modules/sound.nix
 
+    ../../modules/system/user.nix
     ../../modules/system/locale.nix
     ../../modules/system/time.nix
     ../../modules/system/keyboard.nix
