@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [
     google-chrome
   ];
@@ -7,6 +7,7 @@
     firefox = {
       enable = true;
       profiles.boy = {};
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
     };
   };
 }
