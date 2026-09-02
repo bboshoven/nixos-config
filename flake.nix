@@ -28,7 +28,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.boy = import ./hosts/home-server-1/home.nix;
+            home-manager.users.boy = import ./modules/home/server/default.nix;
           }
         ];
       };
@@ -42,7 +42,7 @@
             programs.nix-ld.dev.enable = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.boy = import ./hosts/boy-desktop/home.nix;
+            home-manager.users.boy = import ./modules/home/workstation/default.nix;
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
