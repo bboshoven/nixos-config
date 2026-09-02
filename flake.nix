@@ -36,7 +36,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./hosts/boy-desktop
+          ./hosts/boy-desktop/configuration.nix
           home-manager.nixosModules.home-manager
           {
             programs.nix-ld.dev.enable = true;
