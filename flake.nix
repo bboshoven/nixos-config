@@ -1,5 +1,5 @@
 {
-  description = "Boy Home Server 1";
+  description = "Boy NixOS config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -48,6 +48,5 @@
         ];
       };
     };
-    }
-  };
+  }
 }
