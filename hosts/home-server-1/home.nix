@@ -2,6 +2,6 @@
   home.stateVersion = "25.11";
 
   imports = [
-    ../../home/server/default.nix
+    ../../modules/home/server/default.nix
   ];
 }

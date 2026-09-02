@@ -2,6 +2,6 @@
   home.stateVersion = "23.05";
 
   imports = [
-    ../../home/workstation/default.nix
+    ../../modules/home/workstation/default.nix
   ];
 }
