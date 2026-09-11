@@ -57,7 +57,6 @@
           #OTBR_WEB_PORT = "56374";
           #OTBR_WEB_ENABLE = "1";
         };
-        enableTun = true;
         extraOptions = [
           "--network=host"
           "--device=/dev/net/tun:/dev/net/tun"
