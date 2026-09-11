@@ -53,7 +53,7 @@
         environment = {
           RCP_HOST = "10.0.0.200";
           OTBR_BACKBONE_IF = "enp0s13f0u4u1";
-          OTBR_LOG_LEVEL_INT = "0";
+          OTBR_LOG_LEVEL_INT = "7";
           #OTBR_WEB_PORT = "56374";
           #OTBR_WEB_ENABLE = "1";
         };
