@@ -44,7 +44,7 @@
         ];
       };
       otbr-router = {
-        image = "docker.io/bnutzer/otbr-tcp:20260622";
+        image = "docker.io/bnutzer/otbr-tcp:latest";
         autoStart = true;
         privileged = true;
         volumes = [
@@ -57,6 +57,10 @@
           #OTBR_WEB_PORT = "56374";
           #OTBR_WEB_ENABLE = "1";
         };
+        enableTun = true;
+        allowedDevices = [
+          { modifier = "rwm"; node = "/dev/net/tun"; }
+        ];
         extraOptions = [
           "--network=host"
           "--device=/dev/net/tun:/dev/net/tun"
