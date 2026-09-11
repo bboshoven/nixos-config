@@ -27,6 +27,8 @@
     "net.ipv4.conf.all.forwarding" = 1;
   };
 
+  networking.firewall.allowedTCPPorts = [ 56374 ];
+
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
