@@ -49,9 +49,8 @@
           "/var/lib/otbr:/data"
         ];
         environment = {
-          DEVICE = "tcp://10.0.0.200:6638";
-          BAUDRATE = "460800";
-          OT_INFRA_IF = "enp0s13f0u4u1";
+          RCP_HOST = "10.0.0.200";
+          OTBR_WEB_ENABLE = "1";
         };
         extraOptions = [
           "--network=host"
