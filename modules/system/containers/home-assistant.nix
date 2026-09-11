@@ -58,9 +58,6 @@
           #OTBR_WEB_ENABLE = "1";
         };
         enableTun = true;
-        allowedDevices = [
-          { modifier = "rwm"; node = "/dev/net/tun"; }
-        ];
         extraOptions = [
           "--network=host"
           "--device=/dev/net/tun:/dev/net/tun"
