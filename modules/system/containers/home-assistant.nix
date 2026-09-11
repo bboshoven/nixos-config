@@ -22,11 +22,22 @@
 #    };
 #  };
 
-  services.openthread = {
+  services.openthread-border-router = {
     enable = true;
     # We pass the TCP stream parameters directly to the OTBR agent
     # Using the native spinel URI wrapper format for networked hardware
-    agentOpts = "-I wpan0 spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800 trel://enp0s13f0u4u1";
+    radio = {
+      url = "spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800";
+      baudRate = 460800;   # This and flow control are hardware dependant
+      flowControl = false; # check your device's documentation
+    };
+    #agentOpts = "-I wpan0 spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800";
+    backboneInterfaces = [ "enp0s13f0u4u1" ];
+    web = {
+      enable = true; # enables the basic web interface 
+      # listenAddress = "::"; # defaults to 127.0.0.1
+      listenPort = 56374;   # this port can be altered freely
+    };  
   };
 
   # Make sure Avahi mDNS is tracking local integrations
