@@ -4,12 +4,12 @@
 
   services.mosquitto = {
     enable = true;
-    settings = {
-      listener = [{
-        port = 1883;
-        address = "0.0.0.0";
+    listeners = [{
+      port = 1883;
+      address = "0.0.0.0";
+      settings = {
         allow_anonymous = true;
-      }];
-    };
+      };
+    }];
   };
 }
