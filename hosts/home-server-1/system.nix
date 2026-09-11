@@ -13,6 +13,7 @@
     ../../modules/system/openssh.nix
     ../../modules/system/immich.nix
     ../../modules/system/pihole.nix
+    ../../modules/system/mosquitto.nix
     ../../modules/system/containers/home-assistant.nix
   ];
 }
