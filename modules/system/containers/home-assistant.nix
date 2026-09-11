@@ -22,37 +22,72 @@
 #    };
 #  };
 
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.forwarding" = 1;
+    "net.ipv4.conf.all.forwarding" = 1;
+  };
+
   virtualisation.oci-containers = {
     backend = "podman";
-    containers.homeassistant = {
-      # Pulls the official stable image directly from Home Assistant
-      image = "ghcr.io/home-assistant/home-assistant:2026.8.3";
-      
-      environment = {
-        TZ = "Europe/Amsterdam"; # Replace with your local timezone
-        DBUS_SYSTEM_BUS_ADDRESS = "unix:path=/var/run/dbus/system_bus_socket";
+    containers = {
+      matter-server = {
+        image = "ghcr.io/home-assistant-libs/matter-server:8.1.0";
+        autoStart = true;
+        extraOptions = [
+          "--network=host"
+          "--security-opt=apparmor:unconfined"
+        ];
+        volumes = [
+          "/var/lib/matter-server:/data"
+        ];
       };
+      otbr-router = {
+        image = "bnutzer/otbr-tcp:latest";
+        autoStart = true;
+        privileged = true;
+        volumes = [
+          "/var/lib/otbr:/data"
+        ];
+        environment = {
+          DEVICE = "tcp://10.0.0.200:6638";
+          BAUDRATE = "460800";
+          OT_INFRA_IF = "enp0s13f0u4u1";
+        };
+        extraOptions = [
+          "--network=host"
+          "--device=/dev/net/tun:/dev/net/tun"
+        ];
+      };
+      homeassistant = {
+        # Pulls the official stable image directly from Home Assistant
+        image = "ghcr.io/home-assistant/home-assistant:2026.8.3";
+        
+        environment = {
+          TZ = "Europe/Amsterdam"; # Replace with your local timezone
+          DBUS_SYSTEM_BUS_ADDRESS = "unix:path=/var/run/dbus/system_bus_socket";
+        };
 
-      volumes = [
-        # Mounts a mutable folder on your host to persist all configurations and automations
-        "/var/lib/homeassistant:/config"
-        # Optional: Syncs host time and dbus for hardware/bluetooth detection
-        "/etc/localtime:/etc/localtime:ro"
-        "/run/dbus:/run/dbus:ro"
-        "/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro"
-      ];
+        volumes = [
+          # Mounts a mutable folder on your host to persist all configurations and automations
+          "/var/lib/homeassistant:/config"
+          # Optional: Syncs host time and dbus for hardware/bluetooth detection
+          "/etc/localtime:/etc/localtime:ro"
+          "/run/dbus:/run/dbus:ro"
+          "/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro"
+        ];
 
-      extraOptions = [
-        # Crucial: Uses the host network namespace so mDNS, Zigbee, and local casting work
-        "--network=host"
-        "--cap-add=NET_ADMIN"
-        "--cap-add=NET_RAW"
-        "--ipc=host"
-        "--group-add=keep-groups"
-        #"--userns=keep-id"
-        # Optional: Uncomment if you pass through a USB coordinator (Zigbee/Z-Wave)
-        # "--device=/dev/ttyACM0:/dev/ttyACM0"
-      ];
+        extraOptions = [
+          # Crucial: Uses the host network namespace so mDNS, Zigbee, and local casting work
+          "--network=host"
+          "--cap-add=NET_ADMIN"
+          "--cap-add=NET_RAW"
+          "--ipc=host"
+          "--group-add=keep-groups"
+          #"--userns=keep-id"
+          # Optional: Uncomment if you pass through a USB coordinator (Zigbee/Z-Wave)
+          # "--device=/dev/ttyACM0:/dev/ttyACM0"
+        ];
+      };
     };
   };
 
