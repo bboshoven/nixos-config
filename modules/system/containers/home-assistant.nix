@@ -43,10 +43,10 @@
   # Make sure Avahi mDNS is tracking local integrations
   services.avahi.enable = true;
 
-  boot.kernel.sysctl = {
-    "net.ipv6.conf.all.forwarding" = 1;
-    "net.ipv4.conf.all.forwarding" = 1;
-  };
+  #boot.kernel.sysctl = {
+  #  "net.ipv6.conf.all.forwarding" = 1;
+  #  "net.ipv4.conf.all.forwarding" = 1;
+  #};
 
   #networking.firewall.allowedTCPPorts = [ 56374 ];
 
