@@ -44,7 +44,7 @@
         ];
       };
       otbr-router = {
-        image = "docker.io/bnutzer/otbr-tcp:latest";
+        image = "docker.io/bnutzer/otbr-tcp:20260622";
         autoStart = true;
         privileged = true;
         volumes = [
