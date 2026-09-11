@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     vlc
     gimp3
+    devenv
   ];
 
   programs = {

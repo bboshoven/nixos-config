@@ -4,6 +4,7 @@
     ./common.nix
     ./vscode.nix
     ./git.nix
+    ./opencode.nix
   ];
 }
 
