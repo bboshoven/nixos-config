@@ -17,6 +17,6 @@
     ../../modules/system/steam.nix
     ../../modules/system/zen.nix
     ../../modules/system/libreoffice.nix
-    ../../modules/system/kitty.nix
+    ../../modules/system/alacritty.nix
   ];
 }
