@@ -22,12 +22,22 @@
 #    };
 #  };
 
+  services.openthread = {
+    enable = true;
+    # We pass the TCP stream parameters directly to the OTBR agent
+    # Using the native spinel URI wrapper format for networked hardware
+    agentOpts = "-I wpan0 spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800 trel://enp0s13f0u4u1";
+  };
+
+  # Make sure Avahi mDNS is tracking local integrations
+  services.avahi.enable = true;
+
   boot.kernel.sysctl = {
     "net.ipv6.conf.all.forwarding" = 1;
     "net.ipv4.conf.all.forwarding" = 1;
   };
 
-  networking.firewall.allowedTCPPorts = [ 56374 ];
+  #networking.firewall.allowedTCPPorts = [ 56374 ];
 
   virtualisation.oci-containers = {
     backend = "podman";
@@ -43,25 +53,25 @@
           "/var/lib/matter-server:/data"
         ];
       };
-      otbr-router = {
-        image = "docker.io/bnutzer/otbr-tcp:latest";
-        autoStart = true;
-        privileged = true;
-        volumes = [
-          "/var/lib/otbr:/data"
-        ];
-        environment = {
-          RCP_HOST = "10.0.0.200";
-          OTBR_BACKBONE_IF = "enp0s13f0u4u1";
-          OTBR_LOG_LEVEL_INT = "7";
-          #OTBR_WEB_PORT = "56374";
-          #OTBR_WEB_ENABLE = "1";
-        };
-        extraOptions = [
-          "--network=host"
-          "--device=/dev/net/tun:/dev/net/tun"
-        ];
-      };
+      #otbr-router = {
+      #  image = "docker.io/bnutzer/otbr-tcp:latest";
+      #  autoStart = true;
+      #  privileged = true;
+      #  volumes = [
+      #    "/var/lib/otbr:/data"
+      #  ];
+      #  environment = {
+      #    RCP_HOST = "10.0.0.200";
+      #    OTBR_BACKBONE_IF = "enp0s13f0u4u1";
+      #    OTBR_LOG_LEVEL_INT = "7";
+      #    #OTBR_WEB_PORT = "56374";
+      #    #OTBR_WEB_ENABLE = "1";
+      #  };
+      #  extraOptions = [
+      #    "--network=host"
+      #    "--device=/dev/net/tun:/dev/net/tun"
+      #  ];
+      #};
       homeassistant = {
         # Pulls the official stable image directly from Home Assistant
         image = "ghcr.io/home-assistant/home-assistant:2026.8.3";
