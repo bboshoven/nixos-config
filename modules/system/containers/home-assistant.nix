@@ -27,7 +27,7 @@
     # We pass the TCP stream parameters directly to the OTBR agent
     # Using the native spinel URI wrapper format for networked hardware
     radio = {
-      url = "spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800";
+      url = "spinel+hdlc+tcp://10.0.0.200:6638";
       baudRate = 460800;   # This and flow control are hardware dependant
       flowControl = false; # check your device's documentation
     };
