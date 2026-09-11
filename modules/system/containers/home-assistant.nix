@@ -31,7 +31,7 @@
     backend = "podman";
     containers = {
       matter-server = {
-        image = "ghcr.io/home-assistant-libs/matter-server:8.1.0";
+        image = "ghcr.io/home-assistant-libs/python-matter-server:8.1.0";
         autoStart = true;
         extraOptions = [
           "--network=host"
@@ -42,7 +42,7 @@
         ];
       };
       otbr-router = {
-        image = "bnutzer/otbr-tcp:latest";
+        image = "docker.io/bnutzer/otbr-tcp:latest";
         autoStart = true;
         privileged = true;
         volumes = [
