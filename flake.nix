@@ -32,11 +32,11 @@
           }
         ];
       };
-      "home-cloud-1" = nixpkgs.lib.nixosSystem {
+      "boy-cloud-1" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit (inputs) self nixpkgs home-manager; };
         modules = [
-          ./hosts/home-cloud-1/configuration.nix
+          ./hosts/boy-cloud-1/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
