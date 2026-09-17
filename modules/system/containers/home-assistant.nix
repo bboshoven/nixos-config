@@ -1,116 +1,57 @@
 { pkgs, config, ... }: {
-#  services.home-assistant = {
-#    enable = true;
-#    openFirewall = true;
-#    configDir = /var/lib/hass;
-#    extraComponents = [
-#      "default_config"
-#      "met"
-#      "esphome"
-#      "overkiz"
-#    ];
-#    #customComponents = with pkgs.home-assistant-custom-components; [
-#    #  hacs
-#    #];
-#    config = {
-#      http = {
-#        server_host = "127.0.0.1";
-#        trusted_proxies = [ "127.0.0.1" ];
-#        use_x_forwarded_for = true;
-#      };
-#      default_config = {};
-#    };
-#  };
 
-  services.openthread-border-router = {
-    enable = true;
-    # We pass the TCP stream parameters directly to the OTBR agent
-    # Using the native spinel URI wrapper format for networked hardware
-    radio = {
-      url = "spinel+hdlc+tcp://10.0.0.200:6638";
-      baudRate = 460800;   # This and flow control are hardware dependant
-      flowControl = false; # check your device's documentation
-    };
-    #agentOpts = "-I wpan0 spinel+hdlc+uart://socket://10.0.0.200:6638?uart-baudrate=460800";
-    backboneInterfaces = [ "enp0s13f0u4u1" ];
-    web = {
-      enable = true; # enables the basic web interface 
-      # listenAddress = "::"; # defaults to 127.0.0.1
-      listenPort = 56374;   # this port can be altered freely
-    };  
+  environment.systemPackages = with pkgs; [
+    socat
+  ];
+
+  boot.kernel.sysctl = {
+    "net.ipv6.conf.all.accept_ra" = 2;
+    "net.ipv6.conf.default.accept_ra" = 2;
+    "net.ipv6.conf.all.forwarding" = 1;
+    "net.ipv6.conf.default.forwarding" = 1;
   };
 
-  # Make sure Avahi mDNS is tracking local integrations
-  services.avahi.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedUDPPorts = [ 5353 5540 ];
+    allowedTCPPorts = [ 5540 5580 ];
+  };
 
-  #boot.kernel.sysctl = {
-  #  "net.ipv6.conf.all.forwarding" = 1;
-  #  "net.ipv4.conf.all.forwarding" = 1;
-  #};
-
-  #networking.firewall.allowedTCPPorts = [ 56374 ];
+  services.matterjs-server = {
+    enable = true;
+    port = 5580;
+    package = pkgs.matterjs-server;
+    extraArgs = [
+      "--primary-interface=enp0s13f0u4u1"
+      "--vendorid=4939"
+    ];
+    bluetoothSupport = false;
+  };
 
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
-      matter-server = {
-        image = "ghcr.io/home-assistant-libs/python-matter-server:8.1.0";
-        autoStart = true;
-        extraOptions = [
-          "--network=host"
-          "--security-opt=apparmor:unconfined"
-        ];
-        volumes = [
-          "/var/lib/matter-server:/data"
-        ];
-      };
-      #otbr-router = {
-      #  image = "docker.io/bnutzer/otbr-tcp:latest";
-      #  autoStart = true;
-      #  privileged = true;
-      #  volumes = [
-      #    "/var/lib/otbr:/data"
-      #  ];
-      #  environment = {
-      #    RCP_HOST = "10.0.0.200";
-      #    OTBR_BACKBONE_IF = "enp0s13f0u4u1";
-      #    OTBR_LOG_LEVEL_INT = "7";
-      #    #OTBR_WEB_PORT = "56374";
-      #    #OTBR_WEB_ENABLE = "1";
-      #  };
-      #  extraOptions = [
-      #    "--network=host"
-      #    "--device=/dev/net/tun:/dev/net/tun"
-      #  ];
-      #};
       homeassistant = {
-        # Pulls the official stable image directly from Home Assistant
         image = "ghcr.io/home-assistant/home-assistant:2026.8.3";
-        
+
         environment = {
           TZ = "Europe/Amsterdam"; # Replace with your local timezone
           DBUS_SYSTEM_BUS_ADDRESS = "unix:path=/var/run/dbus/system_bus_socket";
         };
 
         volumes = [
-          # Mounts a mutable folder on your host to persist all configurations and automations
           "/var/lib/homeassistant:/config"
-          # Optional: Syncs host time and dbus for hardware/bluetooth detection
           "/etc/localtime:/etc/localtime:ro"
           "/run/dbus:/run/dbus:ro"
           "/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket:ro"
         ];
 
         extraOptions = [
-          # Crucial: Uses the host network namespace so mDNS, Zigbee, and local casting work
           "--network=host"
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--ipc=host"
           "--group-add=keep-groups"
-          #"--userns=keep-id"
-          # Optional: Uncomment if you pass through a USB coordinator (Zigbee/Z-Wave)
-          # "--device=/dev/ttyACM0:/dev/ttyACM0"
         ];
       };
     };
