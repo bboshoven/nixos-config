@@ -9,5 +9,6 @@
     ../../modules/system/network-manager.nix
 
     ../../modules/system/packages.nix
+    ../../modules/system/openssh.nix
   ];
 }
