@@ -15,6 +15,7 @@
     ../../modules/system/pihole.nix
     ../../modules/system/mosquitto.nix
     ../../modules/system/registry.nix
+    ../../modules/system/newt.nix
     ../../modules/system/containers/home-assistant.nix
   ];
 }

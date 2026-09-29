@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   boot.kernelModules = [ "wireguard" ];
   networking.wireguard.enable = true; 
   networking.firewall.checkReversePath = "loose";

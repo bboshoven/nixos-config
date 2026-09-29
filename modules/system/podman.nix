@@ -1,9 +1,17 @@
 { config, pkgs, ... }: {
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+      defaultPolicy = {
+        transport = {
+          docker = [ "docker.io" "quay.io" ];
+        };
+      };
+    };
   };
 
   virtualisation.containers.registries.search = [
