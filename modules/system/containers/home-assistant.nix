@@ -20,6 +20,7 @@
   services.matterjs-server = {
     enable = true;
     port = 5580;
+    openFirewall = true;
     package = pkgs.matterjs-server;
     extraArgs = [
       "--primary-interface=enp0s13f0u4u1"
@@ -32,7 +33,7 @@
     backend = "podman";
     containers = {
       homeassistant = {
-        image = "ghcr.io/home-assistant/home-assistant:2026.8.3";
+        image = "ghcr.io/home-assistant/home-assistant:2026.9.4";
 
         environment = {
           TZ = "Europe/Amsterdam"; # Replace with your local timezone
