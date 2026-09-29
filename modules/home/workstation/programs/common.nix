@@ -3,6 +3,8 @@
     vlc
     gimp3
     devenv
+    bottles
+    pdfarranger
   ];
 
   programs = {
