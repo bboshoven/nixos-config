@@ -1,5 +1,9 @@
 { ... }: {
 
+  networking.firewall.allowedTCPPorts = [ 80 443 53 ];
+  networking.firewall.allowedUDPPorts = [ 80 443 53 ];
+  services.resolved.enable = true;
+
   # Network (Hetzner uses static IP assignments, and we don't use DHCP here)
   networking.useDHCP = false;
   networking.interfaces."enp41s0".ipv4.addresses = [
@@ -26,9 +30,13 @@
   };
   networking.defaultGateway6 = { address = "fe80::1"; interface = "enp41s0"; };
   networking.nameservers = [
-    "1.1.1.1"
-    "2606:4700:4700::1111"
-    "2606:4700:4700::1001"
+    "213.133.98.98"
+    "213.133.99.99"
+    "213.133.100.100"
+#    "1.1.1.1"
+#    "8.8.8.8"
+#    "2606:4700:4700::1111"
+#    "2606:4700:4700::1001"
   ];
 
 }
