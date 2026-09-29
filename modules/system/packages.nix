@@ -4,5 +4,7 @@
     git
     curl
     iotop
+    bind
+    traceroute
   ];
 }
