@@ -9,6 +9,7 @@
     "lidarr/password" = {};
     "prowlarr/api_key" = {};
     "prowlarr/password" = {};
+    "indexer-api-keys/NzbLife" = {};
     "jellyfin/api_key" = {};
     "jellyfin/boy_password" = {};
     "seerr/api_key" = {};
@@ -54,6 +55,12 @@
       config = {
         apiKey = {_secret = config.sops.secrets."prowlarr/api_key".path;};
         hostConfig.password = {_secret = config.sops.secrets."prowlarr/password".path;};
+#        indexers = [
+#          {
+#            name = "NZB.life";
+#            apiKey._secret = config.sops.secrets."indexer-api-keys/NzbLife".path;
+#          }
+#        ];
       };
     };
 
