@@ -78,7 +78,8 @@
         indexers = [
           {
             name = "NZB.life";
-            schemaName = "NZB.life";
+            schemaName = "Generic Newznab";
+            baseUrl = "https://api.nzb.life/";
             apiKey._secret = config.sops.secrets."indexer-api-keys/NzbLife".path;
           }
         ];
