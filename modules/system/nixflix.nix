@@ -92,6 +92,7 @@
     jellyfin = {
       enable = true;
       apiKey._secret = config.sops.secrets."jellyfin/api_key".path;
+      system.metadataPath = "/data/nixflix/.state/jellyfin/metadata";
       users.boy = {
         mutable = false;
         policy.isAdministrator = true;
