@@ -66,6 +66,8 @@
           nzb_key._secret = config.sops.secrets."sabnzbd/nzb_key".path;
           username._secret = config.sops.secrets."sabnzbd/username".path;
           password._secret = config.sops.secrets."sabnzbd/password".path;
+          host_whitelist = "sabnzbd.boshoven.dev";
+          inet_exposure = "api+web (auth needed)";
         };
 
         servers = [
