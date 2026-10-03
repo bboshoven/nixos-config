@@ -3,6 +3,8 @@
   sops.secrets = {
     "sonarr/api_key" = {};
     "sonarr/password" = {};
+    "sonarr-anime/api_key" = {};
+    "sonarr-anime/password" = {};
     "radarr/api_key" = {};
     "radarr/password" = {};
     "lidarr/api_key" = {};
@@ -42,11 +44,27 @@
       };
     };
 
+    sonarr-anime = {
+      enable = true;
+      config = {
+        apiKey = {_secret = config.sops.secrets."sonarr-anime/api_key".path;};
+        hostConfig.password = {_secret = config.sops.secrets."sonarr-anime/password".path;};
+      };
+    };
+
     radarr = {
       enable = true;
       config = {
         apiKey = {_secret = config.sops.secrets."radarr/api_key".path;};
         hostConfig.password = {_secret = config.sops.secrets."radarr/password".path;};
+      };
+    };
+
+    lidarr = {
+      enable = true;
+      config = {
+        apiKey = {_secret = config.sops.secrets."lidarr/api_key".path;};
+        hostConfig.password = {_secret = config.sops.secrets."lidarr/password".path;};
       };
     };
 
