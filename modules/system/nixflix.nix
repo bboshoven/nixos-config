@@ -26,6 +26,7 @@
   nixflix = {
     enable = true;
     mediaDir = "/data/nixflix/media";
+    downloadsDir = "/data/nixflix/downloads";
     stateDir = "/data/nixflix/.state";
 
     # Reverse proxy: choose one
