@@ -8,8 +8,11 @@
     ../../modules/system/time.nix
     ../../modules/system/keyboard.nix
 #    ../../modules/system/network-manager.nix
-
+ 
+    ../../modules/system/gpg.nix
+    ../../modules/system/sops.nix
     ../../modules/system/packages.nix
+    ../../modules/system/nixflix.nix
     ../../modules/system/openssh.nix
     ../../modules/system/immich.nix
     ../../modules/system/pihole.nix
