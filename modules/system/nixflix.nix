@@ -38,6 +38,15 @@
 
     postgres.enable = true;
 
+    # Sync the default 1080p TRaSH profiles to Sonarr and Radarr.
+    recyclarr.enable = true;
+
+    # Start the cleanup service; rules remain opt-in.
+    maintainerr.enable = true;
+
+    # Configure Arr Connect notifications for the local Jellyfin and Navidrome servers.
+    notif.enable = true;
+
     sonarr = {
       enable = true;
       config = {
