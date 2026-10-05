@@ -3,6 +3,12 @@
   networking.firewall.allowedTCPPorts = [ 80 443 ];
   networking.firewall.allowedUDPPorts = [ 80 443 ];
 
+  fileSystems."/mnt/nixflix" = {
+    device = "10.0.0.201:/volume1/nixflix";
+    fsType = "nfs";
+    options = [ "defaults" "nofail" ];
+  };
+
   boot.kernel.sysctl = {
     "net.ipv6.conf.enp0s13f0u4u1.accept_ra" = 2;
     "net.ipv6.conf.enp0s13f0u4u1.accept_ra_rt_info_max_plen" = 64;

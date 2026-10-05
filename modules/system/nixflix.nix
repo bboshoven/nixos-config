@@ -28,7 +28,7 @@
 
   nixflix = {
     enable = true;
-    mediaDir = "/data/nixflix/media";
+    mediaDir = "/mnt/nixflix/media";
     downloadsDir = "/data/nixflix/downloads";
     stateDir = "/data/nixflix/.state";
 
