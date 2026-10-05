@@ -149,4 +149,9 @@
       };
     };
   };
+
+  services.bazarr = {
+    enable = true;
+    dataDir = "/data/nixflix/.state/bazarr";
+  };
 }
