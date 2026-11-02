@@ -154,4 +154,22 @@
     enable = true;
     dataDir = "/data/nixflix/.state/bazarr";
   };
+
+  services.nginx = {
+    enable = true;
+    virtualHosts."jellyfin.boshoven.dev" = {
+      sslCertificate = "/var/lib/nginx/pangolin-certs/current/jellyfin.boshoven.dev/fullchain.pem";
+      sslCertificateKey = "/var/lib/nginx/pangolin-certs/current/jellyfin.boshoven.dev/privkey.pem";
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8096";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
+        extraConfig = ''
+          proxy_buffering off;
+        '';
+      };
+    };
+  };
+
 }

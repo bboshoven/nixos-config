@@ -21,6 +21,12 @@
 
   boot.kernelParams = [ "consoleblank=300" ];
 
+  programs.ssh.knownHosts.pangolin = {
+    hostNames = [ "c1.boshoven.dev" ];
+
+    publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBKB1Vtiv43g9aS0+RmGi7SUfIhnZnulfCSmsgpqvVLQ root@boy-cloud-1";
+  };
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   system.stateVersion = "25.11"; # Adjust to your current version

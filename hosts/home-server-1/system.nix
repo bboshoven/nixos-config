@@ -9,6 +9,7 @@
     ../../modules/system/keyboard.nix
 #    ../../modules/system/network-manager.nix
  
+    ../../modules/system/pangolin-cert-import.nix
     ../../modules/system/gpg.nix
     ../../modules/system/sops.nix
     ../../modules/system/packages.nix

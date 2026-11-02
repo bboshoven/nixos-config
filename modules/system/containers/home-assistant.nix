@@ -29,6 +29,12 @@
     bluetoothSupport = false;
   };
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   virtualisation.oci-containers = {
     backend = "podman";
     containers = {
