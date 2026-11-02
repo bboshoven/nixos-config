@@ -8,7 +8,12 @@
         "1.1.1.1"
         "2606:4700:4700::1111"
       ];
-      dns.hosts = [ "10.0.0.100 pi.hole" "10.0.0.100 immich.kp.boshoven.dev" ];
+      dns.hosts = [
+        "10.4.0.100 pi.hole"
+        "10.4.0.100 immich.kp.boshoven.dev"
+        "10.4.0.100 jellyfin.boshoven.dev"
+      ];
+      dns.listeningMode = "ALL";
 #      dns.specialDomains.iCloudPrivateRelay = false;
     };
     settings = {

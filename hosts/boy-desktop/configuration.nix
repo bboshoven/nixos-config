@@ -12,6 +12,12 @@
 
   networking.hostName = "boy-desktop"; # Define your hostname.
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;

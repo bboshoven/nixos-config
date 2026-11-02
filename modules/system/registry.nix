@@ -8,6 +8,7 @@
 
     extraConfig = {
       log.level = "debug";
+      http.relativeurls = true;
       storage = {
         delete = {
           enabled = true;
@@ -25,31 +26,34 @@
 #    };
 #  };
 
-#  services.nginx = {
-#    enable = true;
-#    appendHttpConfig = ''
-#      access_log syslog:server=unix:/dev/log combined;
-#    '';
-#    virtualHosts."registry.kp.boshoven.dev" = {
+  services.nginx = {
+    enable = true;
+    appendHttpConfig = ''
+      access_log syslog:server=unix:/dev/log combined;
+    '';
+    virtualHosts."localhost" = {
 #      enableACME = true;
 #      forceSSL = true;
-#      locations."/" = {
-#        proxyPass = "http://127.0.0.1:23369";
-#        proxyWebsockets = true;
-#        recommendedProxySettings = true;
+      listen = [ { addr = "127.0.0.1"; port = 32269; } ];
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:23369";
+        proxyWebsockets = true;
+        recommendedProxySettings = true;
 
-#        basicAuthFile = "/var/lib/nginx/.htpasswd";
+        basicAuthFile = "/var/lib/nginx/.htpasswd";
 
-#        extraConfig = ''
-#          client_max_body_size 0;
+        extraConfig = ''
+          client_max_body_size 0;
+          client_body_timeout 900s;
 
-#          proxy_set_header X-Real-IP $remote_addr;
-#          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-#          proxy_set_header X-Forwarded-Proto $scheme;
+#          proxy_http_version 1.1;
+          proxy_request_buffering off;
+          proxy_buffering off;
 
-#          proxy_buffering off;
-#        '';
-#      };
-#    };
-#  };
+          proxy_read_timeout 900s;
+          proxy_send_timeout 900s;
+        '';
+      };
+    };
+  };
 }
