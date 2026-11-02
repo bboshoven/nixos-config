@@ -2,6 +2,7 @@
   imports = [
     ./modules/networking.nix
     ./modules/containers/burningmadness.nix
+    ./modules/containers/okane.nix
 
     ../../modules/system/user.nix
     ../../modules/system/locale.nix
@@ -15,5 +16,6 @@
     ../../modules/system/openssh.nix
     ../../modules/system/postgresql.nix
     ../../modules/system/podman.nix
+    ../../modules/system/pangolin-cert-export.nix
   ];
 }

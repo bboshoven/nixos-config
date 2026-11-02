@@ -6,11 +6,11 @@
       enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
-      defaultPolicy = {
-        transport = {
-          docker = [ "docker.io" "quay.io" ];
-        };
-      };
+#      defaultPolicy = {
+#        transport = {
+#          docker = [ "docker.io" "quay.io" ];
+#        };
+#      };
     };
   };
 
