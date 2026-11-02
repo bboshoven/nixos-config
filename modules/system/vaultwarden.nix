@@ -23,8 +23,8 @@
       ROCKET_PORT = 8222;
 
       # No public registration; invite users from the admin UI instead.
-      SIGNUPS_ALLOWED = false;
-      INVITATIONS_ALLOWED = true;
+      SIGNUPS_ALLOWED = true;
+      INVITATIONS_ALLOWED = false;
 
       # Keep real-time notifications working through the tunnel.
       ENABLE_WEBSOCKET = true;
