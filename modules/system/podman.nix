@@ -14,10 +14,12 @@
     };
   };
 
-  virtualisation.containers.registries.search = [
-    "docker.io"
-    "registry.kp.boshoven.dev"
-  ];
+  virtualisation.containers.registries.settings = {
+    unqualified-search-registries = [
+      "docker.io"
+      "registry.kp.boshoven.dev"
+    ];
+  };
 
 #  virtualisation.containers = {
 #    enable = true;
