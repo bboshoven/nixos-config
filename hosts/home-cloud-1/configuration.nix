@@ -16,7 +16,9 @@
   boot.supportedFilesystems = [ "zfs" ];
   boot.kernelParams = ["boot.shell_on_fail"];
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # ZFS 2.4.4 supports kernels up to 7.2, so don't use linuxPackages_latest.
+  # The LTS kernel is supported by ZFS and is the recommended choice for ZFS.
+  boot.kernelPackages = pkgs.linuxPackages;
 
   networking.hostName = "home-cloud-1";
   networking.hostId = "00000001";
