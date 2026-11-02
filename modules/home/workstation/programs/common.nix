@@ -5,6 +5,7 @@
     devenv
     bottles
     pdfarranger
+    chatgpt
   ];
 
   programs = {
