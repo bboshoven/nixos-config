@@ -16,6 +16,7 @@
     ../../modules/system/nixflix.nix
     ../../modules/system/openssh.nix
     ../../modules/system/immich.nix
+    ../../modules/system/vaultwarden.nix
     ../../modules/system/pihole.nix
     ../../modules/system/mosquitto.nix
     ../../modules/system/registry.nix
