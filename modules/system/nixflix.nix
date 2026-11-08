@@ -1,5 +1,7 @@
 { config, ... }: {
 
+  imports = [ ./lidarr-delayprofiles-fix.nix ];
+
   sops.secrets = {
     "sonarr/api_key" = {};
     "sonarr/password" = {};
